@@ -128,6 +128,8 @@ class BaseController extends Controller
     {
         if ($groups) {
             $serializerContext = ['groups' => $groups];
+        } else {
+            $serializerContext = [];
         }
 
         if ($entityObject) {
