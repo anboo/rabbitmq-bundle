@@ -126,7 +126,9 @@ class BaseController extends Controller
      */
     public function getEntityFromRequestTo(Request $request, $entityClass, $entityObject = null, $groups = false)
     {
-        $serializerContext = ['groups' => $groups];
+        if ($groups) {
+            $serializerContext = ['groups' => $groups];
+        }
 
         if ($entityObject) {
             $serializerContext['object_to_populate'] = $entityObject;
