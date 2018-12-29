@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -26,18 +24,13 @@ class BaseController extends Controller
     protected $validator;
 
     /**
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
      * @required
      *
      * @param SerializerInterface $serializer
      */
     public function setSerializer(SerializerInterface $serializer)
     {
-        $this->serializer = $serializer;
+       $this->serializer = $serializer;
     }
 
     /**
@@ -51,16 +44,6 @@ class BaseController extends Controller
     }
 
     /**
-     * @required
-     *
-     * @param TranslatorInterface $translator
-     */
-    public function setTranslator(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
-    /**
      * @param mixed $data
      * @param int   $status
      * @param array $serializationGroups
@@ -68,7 +51,7 @@ class BaseController extends Controller
      *
      * @return JsonResponse
      */
-    protected function handleResponse($data, $status = Response::HTTP_OK, $serializationGroups = false, $enableMaxDepth = false)
+    protected function handleResponse($data, $status = Response::HTTP_OK, array $serializationGroups = [], $enableMaxDepth = false)
     {
         $body = $this->getBody($data, $serializationGroups, $enableMaxDepth);
 
@@ -82,7 +65,7 @@ class BaseController extends Controller
      *
      * @return string
      */
-    protected function getBody($data, $serializationGroups = false, $enableMaxDepth = false)
+    protected function getBody($data, array $serializationGroups = [], $enableMaxDepth = false)
     {
         $serializationGroups = $this->processSerializationGroups($serializationGroups);
 
@@ -124,13 +107,9 @@ class BaseController extends Controller
      *
      * @return object
      */
-    public function getEntityFromRequestTo(Request $request, $entityClass, $entityObject = null, $groups = false)
+    public function getEntityFromRequestTo(Request $request, $entityClass,  $entityObject = null, $groups = [])
     {
-        if ($groups) {
-            $serializerContext = ['groups' => $groups];
-        } else {
-            $serializerContext = [];
-        }
+        $serializerContext = ['groups' => $groups];
 
         if ($entityObject) {
             $serializerContext['object_to_populate'] = $entityObject;
@@ -153,24 +132,15 @@ class BaseController extends Controller
      *
      * @return JsonResponse
      */
-    public function handleErrorValidationResponse(ConstraintViolationListInterface $constraintViolationList)
+    public function handleErrorResponse(ConstraintViolationListInterface $constraintViolationList)
     {
         $formatErrors = [];
 
         /** @var ConstraintViolationInterface $violation */
         foreach ($constraintViolationList as $violation) {
-            $formatErrors[$violation->getPropertyPath()] = $this->translator->trans($violation->getMessage());
+            $formatErrors[$violation->getPropertyPath()] = $violation->getMessage();
         }
 
-        return $this->handleErrorResponse($formatErrors);
-    }
-
-    /**
-     * @param array $formatErrors
-     * @return JsonResponse
-     */
-    public function handleErrorResponse(array $formatErrors)
-    {
         return new JsonResponse(['errors' => $formatErrors], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
