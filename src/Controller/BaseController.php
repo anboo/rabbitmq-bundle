@@ -81,7 +81,7 @@ class BaseController extends Controller
      */
     protected function serialize($data, array $serializationGroups = [], $enableMaxDepth = false)
     {
-        $options = ['groups' => $serializationGroups];
+        $options = $serializationGroups ? ['groups' => $serializationGroups]: [];
         if ($enableMaxDepth) {
             $options['enable_max_depth'] = true;
         }
@@ -109,7 +109,11 @@ class BaseController extends Controller
      */
     public function getEntityFromRequestTo(Request $request, $entityClass,  $entityObject = null, $groups = [])
     {
-        $serializerContext = ['groups' => $groups];
+        if ($groups) {
+            $serializerContext = ['groups' => $groups];
+        } else {
+            $serializerContext = [];
+        }
 
         if ($entityObject) {
             $serializerContext['object_to_populate'] = $entityObject;

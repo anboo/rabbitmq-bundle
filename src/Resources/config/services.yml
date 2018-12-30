@@ -1,0 +1,4 @@
+services:
+  Anboo\ApiBundle\Validator\EntityExistsValidator:
+    arguments:
+      - '@doctrine.entitymanager.orm_default'

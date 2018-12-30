@@ -8,10 +8,17 @@
 
 namespace Anboo\ApiBundle;
 
+use Anboo\ApiBundle\DependencyInjection\AnbooApiExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AnbooApiBundle extends Bundle
 {
-
+    /**
+     * @return mixed
+     */
+    public function getContainerExtension()
+    {
+        return new AnbooApiExtension();
+    }
 }
