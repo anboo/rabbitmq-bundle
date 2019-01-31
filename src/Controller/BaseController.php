@@ -147,4 +147,13 @@ class BaseController extends Controller
 
         return new JsonResponse(['errors' => $formatErrors], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /**
+     * @param array $errors
+     * @return JsonResponse
+     */
+    public function createErrorResponse(array $errors)
+    {
+        return new JsonResponse(['errors' => $errors], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }
