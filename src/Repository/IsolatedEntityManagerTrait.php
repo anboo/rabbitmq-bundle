@@ -14,13 +14,10 @@ namespace Anboo\ApiBundle\Repository;
 trait IsolatedEntityManagerTrait
 {
     /**
-     * @param object $entity
-     *
      * @return void
      */
-    private function flush($entity)
+    public function flush()
     {
-        $this->_em->persist($entity);
         $this->_em->flush();
     }
 
@@ -29,9 +26,23 @@ trait IsolatedEntityManagerTrait
      *
      * @return void
      */
-    public function save($entity)
+    private function persist($entity)
     {
-        $this->flush($entity);
+        $this->_em->persist($entity);
+    }
+
+    /**
+     * @param object $entity
+     * @param boolean $flush
+     *
+     * @return void
+     */
+    public function save($entity, $flush = true)
+    {
+        $this->persist($entity);
+        if ($flush) {
+            $this->flush();
+        }
     }
 
     /**
@@ -41,7 +52,8 @@ trait IsolatedEntityManagerTrait
      */
     public function update($entity)
     {
-        $this->flush($entity);
+        $this->persist($entity);
+        $this->flush();
     }
 
     /**
@@ -51,7 +63,7 @@ trait IsolatedEntityManagerTrait
     {
         $this->remove($entity);
 
-        $this->_em->flush();
+        $this->flush();
     }
 
     /**

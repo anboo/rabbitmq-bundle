@@ -2,6 +2,7 @@
 
 namespace Anboo\ApiBundle\Controller;
 
+use App\Serializer\CircularReferenceHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,6 +86,7 @@ class BaseController extends Controller
         if ($enableMaxDepth) {
             $options['enable_max_depth'] = true;
         }
+        $options['circular_reference_handler'] = new CircularReferenceHandler();
 
         return $this->serializer->serialize($data, 'json', $options);
     }
@@ -96,6 +98,10 @@ class BaseController extends Controller
      */
     protected function processSerializationGroups($serializationGroups)
     {
+        if ($serializationGroups) {
+            $serializationGroups[] = 'default';
+        }
+        
         return $serializationGroups;
     }
 
