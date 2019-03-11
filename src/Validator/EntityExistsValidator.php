@@ -44,10 +44,27 @@ class EntityExistsValidator extends ConstraintValidator
             return null;
         }
 
-        if (!$this->entityManager->find($constraint->entityClass, $value)) {
-            $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ string }}', $value)
-                ->addViolation();
+        if ($constraint->field) {
+            $entity = $this->entityManager
+                ->createQueryBuilder()
+                ->select('e')
+                ->from($constraint->entityClass, 'e')
+                ->where('e.'.$constraint->field.' = :value')
+                ->setParameter('value', $value)
+                ->getQuery()
+                ->getResult();
+
+            if ($entity) {
+                $this->context->buildViolation($constraint->message)
+                    ->setParameter('{{ string }}', $value)
+                    ->addViolation();
+            }
+        } else {
+            if (!$this->entityManager->find($constraint->entityClass, $value)) {
+                $this->context->buildViolation($constraint->message)
+                    ->setParameter('{{ string }}', $value)
+                    ->addViolation();
+            }
         }
     }
 }

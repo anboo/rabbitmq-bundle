@@ -21,6 +21,8 @@ class EntityExistsConstraint extends Constraint
 
     public $entityClass;
 
+    public $field;
+
     /**
      * @return string
      */

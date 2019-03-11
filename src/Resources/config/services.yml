@@ -1,8 +1,4 @@
 services:
-  Anboo\ApiBundle\Validator\EntityExistsValidator:
-    arguments:
-      - '@doctrine.entitymanager.orm_default'
-
   Anboo\ApiBundle\Controller\SwaggerUIController:
     arguments:
       - '@nelmio_api_doc.generator'
@@ -13,3 +9,21 @@ services:
     arguments:
       - '@nelmio_api_doc.generator.default'
     tags: ['controller.service_arguments']
+
+  Anboo\ApiBundle\Validator\EntityExistsValidator:
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    tags: ['validator.constraint_validator']
+
+  Anboo\ApiBundle\Serializer\Normalizer\EntityNormalizer:
+    public: false
+    autowire: true
+    autoconfigure: true
+    tags: ['serializer.normalizer']
+
+  Anboo\ApiBundle\Serializer\Normalizer\UuidNormalizer:
+    public: false
+    autowire: true
+    autoconfigure: true
+    tags:
+      - { name: serializer.normalizer, priority: 255 }

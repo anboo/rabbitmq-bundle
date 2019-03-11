@@ -2,7 +2,8 @@
 
 namespace Anboo\ApiBundle\Controller;
 
-use App\Serializer\CircularReferenceHandler;
+use Anboo\ApiBundle\Swagger\ApiResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class BaseController extends Controller
+class BaseController extends AbstractController
 {
     /**
      * @var SerializerInterface
@@ -54,9 +55,14 @@ class BaseController extends Controller
      */
     protected function handleResponse($data, $status = Response::HTTP_OK, array $serializationGroups = [], $enableMaxDepth = false)
     {
-        $body = $this->getBody($data, $serializationGroups, $enableMaxDepth);
-
-        return new JsonResponse($body, $status, [], true);
+        return $this->createJsonResponse(
+            ApiResponse::createSuccessfullyResponse(
+                $this->getRequestId(),
+                $data
+            ),
+            $status,
+            $serializationGroups
+        );
     }
 
     /**
@@ -83,10 +89,10 @@ class BaseController extends Controller
     protected function serialize($data, array $serializationGroups = [], $enableMaxDepth = false)
     {
         $options = $serializationGroups ? ['groups' => $serializationGroups]: [];
+
         if ($enableMaxDepth) {
             $options['enable_max_depth'] = true;
         }
-        $options['circular_reference_handler'] = new CircularReferenceHandler();
 
         return $this->serializer->serialize($data, 'json', $options);
     }
@@ -160,6 +166,43 @@ class BaseController extends Controller
      */
     public function createErrorResponse(array $errors)
     {
-        return new JsonResponse(['errors' => $errors], Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response = ApiResponse::createErrorResponse(
+            $this->getRequestId(),
+            $errors
+        );
+
+        return $this->createJsonResponse($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * @param ApiResponse $apiResponse
+     * @param integer $code
+     * @param array $serializationGroups
+     * @return JsonResponse
+     */
+    public function createJsonResponse(ApiResponse $apiResponse, $code = Response::HTTP_OK, array $serializationGroups = [])
+    {
+        $data = [
+            'status' => $apiResponse->getStatus(),
+            'response' => $apiResponse->getData(),
+            'errors' => $apiResponse->getErrors(),
+            'requestId' => $apiResponse->getRequestId(),
+        ];
+
+        $body = $this->serialize($data, $serializationGroups);
+
+        return new JsonResponse($body, $code, [], true);
+    }
+
+    /**
+     * @return string
+     */
+    private function getRequestId()
+    {
+        if ($request = $this->get('request_stack')->getCurrentRequest()) {
+            return $request->headers->get('X-Request-Id');
+        }
+
+        return null;
     }
 }
