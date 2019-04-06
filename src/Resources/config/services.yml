@@ -27,3 +27,10 @@ services:
     autoconfigure: true
     tags:
       - { name: serializer.normalizer, priority: 255 }
+
+  Anboo\ApiBundle\Serializer\Normalizer\IgnoredAttributesNormalizer:
+    public: false
+    autowire: true
+    autoconfigure: true
+    tags:
+      - { name: serializer.normalizer, priority: 255 }
