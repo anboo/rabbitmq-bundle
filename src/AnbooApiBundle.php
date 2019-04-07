@@ -9,6 +9,7 @@
 namespace Anboo\ApiBundle;
 
 use Anboo\ApiBundle\DependencyInjection\AnbooApiExtension;
+use Anboo\ApiBundle\DependencyInjection\CompilerPass\FixSerializerCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -20,5 +21,12 @@ class AnbooApiBundle extends Bundle
     public function getContainerExtension()
     {
         return new AnbooApiExtension();
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new FixSerializerCompilerPass());
     }
 }
