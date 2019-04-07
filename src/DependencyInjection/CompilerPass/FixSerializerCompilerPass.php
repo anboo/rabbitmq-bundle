@@ -37,8 +37,13 @@ class FixSerializerCompilerPass implements CompilerPassInterface
             }
 
             if (is_subclass_of($class, ObjectNormalizer::class)) {
-                $definition->addMethodCall('setCircularReferenceHandler', $setCircularReferenceHandlerProxyArguments);
-                $definition->addMethodCall('setMaxDepthHandler', $setMaxDepthHandlerProxyArguments);
+                if ($setCircularReferenceHandlerProxyArguments) {
+                    $definition->addMethodCall('setCircularReferenceHandler', $setCircularReferenceHandlerProxyArguments);
+                }
+
+                if ($setMaxDepthHandlerProxyArguments) {
+                    $definition->addMethodCall('setMaxDepthHandler', $setMaxDepthHandlerProxyArguments);
+                }
             }
         }
     }
