@@ -197,12 +197,12 @@ class BaseController extends AbstractController
     /**
      * @return string
      */
-    private function getRequestId()
+    private function getRequestId() : string
     {
         if ($request = $this->get('request_stack')->getCurrentRequest()) {
-            return $request->headers->get('X-Request-Id');
+            return $request->headers->get('X-Request-Id') ?? '';
         }
 
-        return null;
+        return '';
     }
 }
