@@ -88,6 +88,7 @@ class BaseController extends AbstractController
      */
     protected function serialize($data, array $serializationGroups = [], $enableMaxDepth = false)
     {
+        $serializationGroups = $this->processSerializationGroups($serializationGroups);
         $options = $serializationGroups ? ['groups' => $serializationGroups]: [];
 
         if ($enableMaxDepth) {
