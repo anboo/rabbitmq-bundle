@@ -95,6 +95,16 @@ class BaseController extends AbstractController
             $options['enable_max_depth'] = true;
         }
 
+        $options['circular_reference_handler'] = function($object) {
+            if (method_exists($object, 'getId')) {
+                return [
+                    'id' => $object->getId(),
+                ];
+            } else {
+                return [];
+            }
+        };
+
         return $this->serializer->serialize($data, 'json', $options);
     }
 
