@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Anboo\\ApiBundle\\": "src/"
+            "Anboo\\RabbitmqBundle\\": "src/"
         }
     }
 }
