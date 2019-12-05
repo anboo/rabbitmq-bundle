@@ -350,7 +350,6 @@ class Producer
      */
     public function sendPacket($exchange, Packet $packet, string $routingKey = null, $options = [])
     {
-        $packet->setAuthContext($this->securityManager->getAuthenticationInformationData());
         $packet->setReplyContext(array_merge($this->replyContext()->all(), $packet->getReplyContext() ?? []));
 
         $this->publishToExchange($exchange, json_encode($packet), $routingKey, $options);

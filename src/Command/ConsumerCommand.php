@@ -74,11 +74,6 @@ class ConsumerCommand extends Command
     private $logger;
 
     /**
-     * @var SecurityManager
-     */
-    private $securityManager;
-
-    /**
      * @var int
      */
     private $processedMessages = 0;
@@ -99,11 +94,6 @@ class ConsumerCommand extends Command
     private $entityManager;
 
     /**
-     * @var SentryClient
-     */
-    private $sentrySymfonyClient;
-
-    /**
      * @var EventDispatcher
      */
     private $eventDispatcher;
@@ -117,9 +107,7 @@ class ConsumerCommand extends Command
      * @param RouterCollection $routeCollection
      * @param ContainerInterface $container
      * @param LoggerInterface $logger
-     * @param SecurityManager $securityManager
      * @param EntityManagerInterface $entityManager
-     * @param SentryClient $sentrySymfonyClient
      */
     public function __construct (
         AMQPConnection $connection,
@@ -128,9 +116,7 @@ class ConsumerCommand extends Command
         RouterCollection $routeCollection,
         ContainerInterface $container,
         LoggerInterface $logger,
-        SecurityManager $securityManager,
         EntityManagerInterface $entityManager,
-        SentryClient $sentrySymfonyClient,
         EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct();
@@ -142,8 +128,6 @@ class ConsumerCommand extends Command
         $this->container = $container;
         $this->logger = $logger;
         $this->entityManager = $entityManager;
-        $this->sentrySymfonyClient = $sentrySymfonyClient;
-        $this->securityManager = $securityManager;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -312,36 +296,6 @@ class ConsumerCommand extends Command
         );
         $packet->setAMQPMessage($msg);
 
-        if (isset($dataMsg['authContext']) && $dataMsg['authContext']) {
-            try {
-                $authenticationInformation = $this->securityManager->getAuthenticationInformationFromData($dataMsg['authContext']);
-                if ($authenticationInformation) {
-                    $user = $authenticationInformation->getUser();
-
-                    $roles = $user->getRoles();
-                    $roles[] = 'ROLE_AMQP';
-
-                    $token = new AmqpPreAuthenticatedToken(
-                        $user,
-                        $user->getUsername().'#'.$authenticationInformation->getAccessToken(),
-                        'main',
-                        $roles
-                    );
-                    $token->setAttribute('authentication_information', $authenticationInformation);
-
-                    $this->container->get('security.token_storage')->setToken($token);
-                }
-            } catch (PasetoException | \SodiumException $exception) {
-                $this->logger->error('Cannot decrypt authContext: '.$exception->getMessage(), RabbitMqContext::getLoggingContext($packet, $exception));
-                $msgChannel->basic_reject($msg->delivery_info['delivery_tag'], false);
-            } catch (\Exception $exception) {
-                $this->logger->error($exception, RabbitMqContext::getLoggingContext($packet, $exception));
-                $msgChannel->basic_reject($msg->delivery_info['delivery_tag'], false);
-            }
-
-            $packet->setAuthContext($dataMsg['authContext']);
-        }
-
         if (isset($dataMsg['rpcCallStack'])) {
             $packet->setRpcCallStack($dataMsg['rpcCallStack'] ?? []);
         }
@@ -357,18 +311,8 @@ class ConsumerCommand extends Command
                 $processor->loadReplyContext($replyContext);
             }
             call_user_func([$processor, $method], $packet);
-        } catch (ORMException $ORMException) {
-            $event = new RejectEvent($packet, $ORMException);
-            $this->eventDispatcher->dispatch(self::BEFORE_REJECT, $event);
-            $msgChannel->basic_reject($msg->delivery_info['delivery_tag'], $event->isRequeue());
-            $this->logger->error(sprintf('ORM error: %s', $ORMException->getMessage()), RabbitMqContext::getLoggingContext($packet, $exception));
-            throw $ORMException;
         } catch (\Exception $exception) {
-            $event = new RejectEvent($packet, $exception);
-            $this->eventDispatcher->dispatch(self::BEFORE_REJECT, $event);
-            $msgChannel->basic_reject($msg->delivery_info['delivery_tag'], $event->isRequeue());
             $this->logger->error(sprintf('AMQP rejected, error: %s', $exception->getMessage()), RabbitMqContext::getLoggingContext($packet, $exception));
-
             return;
         }
 
@@ -376,8 +320,6 @@ class ConsumerCommand extends Command
 
         $this->entityManager->clear();
         $this->entityManager->getConnection()->close();
-        $this->sentrySymfonyClient->sendUnsentErrors();
-        $this->sentrySymfonyClient->breadcrumbs->reset();
 
         gc_collect_cycles();
 

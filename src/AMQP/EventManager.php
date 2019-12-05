@@ -28,10 +28,10 @@ class EventManager
     /**
      * EventManager constructor.
      *
-     * @param CachedReader $annotationReader
+     * @param Reader $annotationReader
      * @param Producer $producer
      */
-    public function __construct(CachedReader $annotationReader, Producer $producer)
+    public function __construct(Reader $annotationReader, Producer $producer)
     {
         $this->annotationReader = $annotationReader;
         $this->producer = $producer;

@@ -38,9 +38,6 @@ class Packet implements JsonSerializable
     private $rpc;
 
     /** @var array */
-    private $authContext = [];
-
-    /** @var array */
     private $rpcCallStack = [];
 
     /** @var AMQPMessage|null */
@@ -239,25 +236,6 @@ class Packet implements JsonSerializable
     }
 
     /**
-     * @return array
-     */
-    public function getAuthContext(): ?array
-    {
-        return $this->authContext;
-    }
-
-    /**
-     * @param array $authContext
-     * @return $this
-     */
-    public function setAuthContext(?array $authContext): self
-    {
-        $this->authContext = $authContext;
-
-        return $this;
-    }
-
-    /**
      * @return array|mixed
      * @throws \ReflectionException
      */
@@ -340,7 +318,6 @@ class Packet implements JsonSerializable
             'errors' => $errors,
             'replyContext' => $this->getReplyContext() ?? [],
             'rpc' => $this->rpc,
-            'authContext' => $this->authContext,
             'rpcCallStack' => $this->rpcCallStack,
         ];
     }

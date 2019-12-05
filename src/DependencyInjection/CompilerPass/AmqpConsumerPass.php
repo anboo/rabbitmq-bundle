@@ -26,7 +26,7 @@ final class AmqpConsumerPass implements CompilerPassInterface
         $routeCollectionDefinition = $container->getDefinition($routeCollectionServiceId);
 
         $routes = [];
-        foreach ($container->findTaggedServiceIds('anbooqueue_consumer') as $serviceId => $serviceData) {
+        foreach ($container->findTaggedServiceIds('anboo.queue_consumer') as $serviceId => $serviceData) {
             $reflectionClass = new \ReflectionClass(
                 $container->getDefinition($serviceId)->getClass()
             );
