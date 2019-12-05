@@ -1,5 +1,5 @@
 {
-    "name": "anboo/api-bundle",
+    "name": "anboo/rabbitmq-bundle",
     "type": "library",
     "description": "Bundle for Symfony",
     "require": {
