@@ -170,18 +170,6 @@ class Producer
     }
 
     /**
-     * @required
-     * @param SecurityManager $securityManager
-     * @return $this
-     */
-    public function setSecurityManager(SecurityManager $securityManager): self
-    {
-        $this->securityManager = $securityManager;
-
-        return $this;
-    }
-
-    /**
      * @param AMQPChannel $channel
      *
      * @return $this

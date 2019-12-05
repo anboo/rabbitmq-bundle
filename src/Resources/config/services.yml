@@ -1,0 +1,89 @@
+services:
+  Anboo\RabbitmqBundle\AMQP\AMQPConnection:
+    public: true
+    autowire: true
+    arguments:
+      - '%anboo_rabbitmq.rabbitmq.host%'
+      - '%anboo_rabbitmq.rabbitmq.port%'
+      - '%anboo_rabbitmq.rabbitmq.username%'
+      - '%anboo_rabbitmq.rabbitmq.password%'
+      - '%anboo_rabbitmq.rabbitmq.vhost%'
+
+  Anboo\RabbitmqBundle\AMQP\RabbitRestClient:
+    public: true
+    autowire: true
+    arguments:
+      - '%anboo_rabbitmq.rabbitmq.host%'
+      - '%anboo_rabbitmq.rabbitmq.vhost%'
+      - '%anboo_rabbitmq.rabbitmq.protocol%'
+      - '%anboo_rabbitmq.rabbitmq.http_port%'
+      - '%anboo_rabbitmq.rabbitmq.username%'
+      - '%anboo_rabbitmq.rabbitmq.password%'
+
+  Anboo\RabbitmqBundle\AMQP\Producer:
+    public: true
+    autowire: true
+    autoconfigure: true
+    calls:
+      - ['setResponseQueueCallback', ['%anboo_rabbitmq.rabbitmq.rpc_response_queue%']]
+      - ['setLifetimeCallbackRpcQueue', ['%anboo_rabbitmq.rabbitmq.lifetime_callback_rpc_queue%']]
+
+  Anboo\RabbitmqBundle\Response\Async\AsyncResponseSender:
+    public: true
+    autowire: true
+    autoconfigure: true
+    calls:
+      - ['setResponseQueueCallback', ['%anboo_rabbitmq.rabbitmq.rpc_response_queue%']]
+      - ['setLifetimeCallbackRpcQueue', ['%anboo_rabbitmq.rabbitmq.lifetime_callback_rpc_queue%']]
+
+  Anboo\RabbitmqBundle\Command\ConsumerCommand:
+    public: true
+    autowire: true
+    tags:
+      - { name: console.command }
+
+  Anboo\RabbitmqBundle\Command\DebugQueueRouter:
+    public: true
+    autowire: true
+    tags:
+      - { name: console.command }
+
+  Anboo\RabbitmqBundle\Command\SendPacketCommand:
+    public: true
+    autowire: true
+    tags:
+      - { name: console.command }
+
+  Anboo\RabbitmqBundle\Command\MoveMessageToQueueCommand:
+    public: true
+    autowire: true
+    tags:
+      - { name: console.command }
+
+  Anboo\RabbitmqBundle\Command\DeleteExchangeCommand:
+    public: true
+    autowire: true
+    tags:
+      - { name: console.command }
+
+  Anboo\RabbitmqBundle\AMQP\RPC\RpcManager:
+    public: true
+    autowire: true
+    bind:
+      $prefixResponseCallbackQueueName: '%anboo_rabbitmq.rabbitmq.rpc_response_frontend_queue_prefix%'
+      $lifetimeCallbackRpcQueue: '%anboo_rabbitmq.rabbitmq.lifetime_callback_rpc_queue%'
+
+  Anboo\RabbitmqBundle\AMQP\EventManager:
+    public: true
+    autowire: true
+    autoconfigure: true
+    
+  Anboo\RabbitmqBundle\AMQP\Router\RouterCollection:
+    public: true
+    arguments:
+      - []
+
+  Anboo\RabbitmqBundle\AMQP\PlaceholderResolver:
+    public: true
+    autoconfigure: true
+    autowire: true

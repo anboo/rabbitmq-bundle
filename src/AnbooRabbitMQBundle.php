@@ -8,8 +8,8 @@
 
 namespace Anboo\RabbitmqBundle;
 
-use Anboo\RabbitmqBundle\DependencyInjection\AnbooApiExtension;
-use Anboo\RabbitmqBundle\DependencyInjection\Compiler\AmqpConsumerPass;
+use Anboo\RabbitmqBundle\DependencyInjection\AnbooRabbitmqExtension;
+use Anboo\RabbitmqBundle\DependencyInjection\CompilerPass\AmqpConsumerPass;
 use Anboo\RabbitmqBundle\DependencyInjection\CompilerPass\FixSerializerCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -21,7 +21,7 @@ class AnbooRabbitMQBundle extends Bundle
      */
     public function getContainerExtension()
     {
-        return new AnbooApiExtension();
+        return new AnbooRabbitmqExtension();
     }
 
     public function build(ContainerBuilder $container)

@@ -1,12 +1,14 @@
 <?php
 
-namespace Anboo\RabbitmqBundle\DependencyInjection\Compiler;
+namespace Anboo\RabbitmqBundle\DependencyInjection\CompilerPass;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Anboo\RabbitmqBundle\AMQP\Router\Route;
 use Anboo\RabbitmqBundle\Annotation\Enqueue\Consume;
 use Anboo\RabbitmqBundle\AMQP\Router\RouterCollection;
+use Anboo\RabbitmqBundle\AMQP\RPC\FileSystemResponseStorage;
+use Anboo\RabbitmqBundle\AMQP\RPC\ResponseStorageInterface;
 
 /**
  * Class AmqpConsumerPass
@@ -44,5 +46,8 @@ final class AmqpConsumerPass implements CompilerPassInterface
             $routeCollectionDefinition->getArgument(0),
             $routes
         ));
+
+        $container->register(FileSystemResponseStorage::class, FileSystemResponseStorage::class);
+        $container->setAlias(ResponseStorageInterface::class, FileSystemResponseStorage::class);
     }
 }
