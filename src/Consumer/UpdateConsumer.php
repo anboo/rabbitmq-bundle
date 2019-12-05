@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Persistence\Mapping\MappingException;
@@ -8,14 +8,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Anboo\ApiBundle\AMQP\Exception\AmqpFatalException;
-use Anboo\ApiBundle\AMQP\Exception\AmqpNotFoundEntityException;
-use Anboo\ApiBundle\AMQP\Packet;
-use Anboo\ApiBundle\AMQP\Router\Route;
-use Anboo\ApiBundle\Annotation\DTO;
-use Anboo\ApiBundle\EventDispatcher\AMQP\AmqpBeforeProcess;
-use Anboo\ApiBundle\Service\CRUD\UpdateItemService;
-use Anboo\ApiBundle\Service\DTO\DTOFactory;
+use Anboo\RabbitmqBundle\AMQP\Exception\AmqpFatalException;
+use Anboo\RabbitmqBundle\AMQP\Exception\AmqpNotFoundEntityException;
+use Anboo\RabbitmqBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Router\Route;
+use Anboo\RabbitmqBundle\Annotation\DTO;
+use Anboo\RabbitmqBundle\EventDispatcher\AMQP\AmqpBeforeProcess;
+use Anboo\RabbitmqBundle\Service\CRUD\UpdateItemService;
+use Anboo\RabbitmqBundle\Service\DTO\DTOFactory;
 use Webslon\Library\Api\Exception\ApiException;
 
 class UpdateConsumer extends AbstractCrudConsumer

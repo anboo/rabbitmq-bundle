@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP\Exception;
+namespace Anboo\RabbitmqBundle\AMQP\Exception;
 
 /**
  * Class AmqpFatalException

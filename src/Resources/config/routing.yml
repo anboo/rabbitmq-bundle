@@ -1,8 +1,0 @@
-webslon_api_homepage:
-  controller: Anboo\ApiBundle\Controller\SwaggerUIController
-  path:   /
-
-app.swagger:
-  path: /doc.json
-  methods: GET
-  defaults: { _controller: Anboo\ApiBundle\Controller\DocumentationController }

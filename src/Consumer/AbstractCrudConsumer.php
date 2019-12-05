@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use Doctrine\Common\Annotations\Reader;
 use PhpAmqpLib\Exception\AMQPConnectionClosedException;
@@ -11,16 +11,16 @@ use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolation;
-use Anboo\ApiBundle\AMQP\AMQPConnection;
-use Anboo\ApiBundle\AMQP\Exception\AmqpFatalException;
-use Anboo\ApiBundle\AMQP\Packet;
-use Anboo\ApiBundle\AMQP\Producer;
-use Anboo\ApiBundle\Annotation\Enqueue\Consume;
-use Anboo\ApiBundle\Annotation\Enqueue\CrudConsume;
-use Anboo\ApiBundle\Annotation\Enqueue\CrudProduce;
-use Anboo\ApiBundle\Annotation\Enqueue\Produce;
-use Anboo\ApiBundle\Exception\ConnectionTimeoutException;
-use Anboo\ApiBundle\Monolog\RabbitMqContext;
+use Anboo\RabbitmqBundle\AMQP\AMQPConnection;
+use Anboo\RabbitmqBundle\AMQP\Exception\AmqpFatalException;
+use Anboo\RabbitmqBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Producer;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\Consume;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\CrudConsume;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\CrudProduce;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\Produce;
+use Anboo\RabbitmqBundle\Exception\ConnectionTimeoutException;
+use Anboo\RabbitmqBundle\Monolog\RabbitMqContext;
 use Webslon\Library\Api\Exception\ApiException;
 use Webslon\Library\Api\Service\HandlerException\Validation\ValidationException;
 use Webslon\Library\Api\Service\HandlerException\ValidationAndNormalizationException;

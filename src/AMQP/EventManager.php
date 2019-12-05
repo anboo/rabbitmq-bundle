@@ -1,15 +1,15 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP;
+namespace Anboo\RabbitmqBundle\AMQP;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use PhpAmqpLib\Message\AMQPMessage;
 use Ramsey\Uuid\Uuid;
-use Anboo\ApiBundle\AMQP\Exception\AmqpFatalException;
-use Anboo\ApiBundle\Annotation\Enqueue\CrudProduce;
-use Anboo\ApiBundle\Annotation\Enqueue\Produce;
+use Anboo\RabbitmqBundle\AMQP\Exception\AmqpFatalException;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\CrudProduce;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\Produce;
 
 /**
  * Class EventManager

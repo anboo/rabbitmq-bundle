@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\Command;
+namespace Anboo\RabbitmqBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
@@ -14,20 +14,20 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Anboo\ApiBundle\AMQP\AMQPConnection;
-use Anboo\ApiBundle\AMQP\Model\Bind;
-use Anboo\ApiBundle\AMQP\Packet;
-use Anboo\ApiBundle\AMQP\RabbitRestClient;
-use Anboo\ApiBundle\AMQP\Router\RouterCollection;
-use Anboo\ApiBundle\AMQP\RPC\ResponseStorageInterface;
-use Anboo\ApiBundle\AMQP\RPC\RpcResponse;
-use Anboo\ApiBundle\Consumer\Consumer;
-use Anboo\ApiBundle\Monolog\RabbitMqContext;
+use Anboo\RabbitmqBundle\AMQP\AMQPConnection;
+use Anboo\RabbitmqBundle\AMQP\Model\Bind;
+use Anboo\RabbitmqBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\RabbitRestClient;
+use Anboo\RabbitmqBundle\AMQP\Router\RouterCollection;
+use Anboo\RabbitmqBundle\AMQP\RPC\ResponseStorageInterface;
+use Anboo\RabbitmqBundle\AMQP\RPC\RpcResponse;
+use Anboo\RabbitmqBundle\Consumer\Consumer;
+use Anboo\RabbitmqBundle\Monolog\RabbitMqContext;
 use Webslon\Bundle\AuthBundle\Security\Encryptor;
 use Webslon\Bundle\AuthBundle\Security\SecurityManager;
 use Webslon\Bundle\AuthBundle\Security\Token\AmqpPreAuthenticatedToken;
 use Webslon\Library\Logger\Client\SentryClient;
-use Anboo\ApiBundle\EventDispatcher\AMQP\RejectEvent;
+use Anboo\RabbitmqBundle\EventDispatcher\AMQP\RejectEvent;
 
 
 class ConsumerCommand extends Command

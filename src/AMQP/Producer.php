@@ -1,17 +1,17 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP;
+namespace Anboo\RabbitmqBundle\AMQP;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Wire\AMQPTable;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Anboo\ApiBundle\AMQP\RPC\Exchange;
-use Anboo\ApiBundle\AMQP\RPC\ReplyContextTrait;
-use Anboo\ApiBundle\AMQP\RPC\ResponseStorageInterface;
-use Anboo\ApiBundle\AMQP\RPC\RpcManager;
-use Anboo\ApiBundle\Model\Model;
+use Anboo\RabbitmqBundle\AMQP\RPC\Exchange;
+use Anboo\RabbitmqBundle\AMQP\RPC\ReplyContextTrait;
+use Anboo\RabbitmqBundle\AMQP\RPC\ResponseStorageInterface;
+use Anboo\RabbitmqBundle\AMQP\RPC\RpcManager;
+use Anboo\RabbitmqBundle\Model\Model;
 use Webslon\Bundle\AuthBundle\Model\AuthenticationInformation;
 use Webslon\Bundle\AuthBundle\Model\User;
 use Webslon\Bundle\AuthBundle\Security\SecurityManager;

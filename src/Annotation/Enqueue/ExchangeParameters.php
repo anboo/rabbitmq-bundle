@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\Annotation\Enqueue;
+namespace Anboo\RabbitmqBundle\Annotation\Enqueue;
 
 /**
  * Class ExchangeParameters

@@ -1,9 +1,9 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP\RPC;
+namespace Anboo\RabbitmqBundle\AMQP\RPC;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Anboo\ApiBundle\Util\PropertyAccessor;
+use Anboo\RabbitmqBundle\Util\PropertyAccessor;
 
 class ReplyContext
 {

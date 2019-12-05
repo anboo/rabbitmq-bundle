@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP\Router;
+namespace Anboo\RabbitmqBundle\AMQP\Router;
 
 /**
  * Class RouterCollection

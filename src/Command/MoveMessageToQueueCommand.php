@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Anboo\ApiBundle\Command;
+namespace Anboo\RabbitmqBundle\Command;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LoggerInterface;
@@ -10,8 +10,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Anboo\ApiBundle\AMQP\AMQPConnection;
-use Anboo\ApiBundle\AMQP\Producer;
+use Anboo\RabbitmqBundle\AMQP\AMQPConnection;
+use Anboo\RabbitmqBundle\AMQP\Producer;
 
 /**
  * Class MoveMessageToQueueCommand

@@ -1,11 +1,11 @@
 <?php
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use Enqueue\Client\ProducerInterface;
 use Interop\Queue\Processor;
 use PhpAmqpLib\Message\AMQPMessage;
-use Anboo\ApiBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Packet;
 
 /**
  * Interface WebslonProducer

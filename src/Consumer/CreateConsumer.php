@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
-use Anboo\ApiBundle\AMQP\Packet;
-use Anboo\ApiBundle\AMQP\Router\Route;
-use Anboo\ApiBundle\EventDispatcher\AMQP\AmqpBeforeProcess;
-use Anboo\ApiBundle\Model\JsonDataEntityInterface;
-use Anboo\ApiBundle\Service\CRUD\AddItemService;
+use Anboo\RabbitmqBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Router\Route;
+use Anboo\RabbitmqBundle\EventDispatcher\AMQP\AmqpBeforeProcess;
+use Anboo\RabbitmqBundle\Model\JsonDataEntityInterface;
+use Anboo\RabbitmqBundle\Service\CRUD\AddItemService;
 use Webslon\Library\Serializer\Service\SerializeService;
 
 /**

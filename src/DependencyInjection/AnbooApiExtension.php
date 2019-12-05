@@ -6,7 +6,7 @@
  * Time: 13:28
  */
 
-namespace Anboo\ApiBundle\DependencyInjection;
+namespace Anboo\RabbitmqBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

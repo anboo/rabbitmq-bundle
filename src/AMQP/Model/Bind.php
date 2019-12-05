@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP\Model;
+namespace Anboo\RabbitmqBundle\AMQP\Model;
 
 /**
  * Class Bind

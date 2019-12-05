@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP\RPC;
+namespace Anboo\RabbitmqBundle\AMQP\RPC;
 
 /**
  * Class ReplyContextTrait

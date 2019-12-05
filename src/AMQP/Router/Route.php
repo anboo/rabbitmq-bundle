@@ -1,8 +1,8 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP\Router;
+namespace Anboo\RabbitmqBundle\AMQP\Router;
 
-use Anboo\ApiBundle\Annotation\Enqueue\Consume;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\Consume;
 
 /**
  * Class Route

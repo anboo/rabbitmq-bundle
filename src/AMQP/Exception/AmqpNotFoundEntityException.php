@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Anboo\ApiBundle\AMQP\Exception;
+namespace Anboo\RabbitmqBundle\AMQP\Exception;
 
 use Symfony\Component\HttpFoundation\Response;
 use Webslon\Library\Api\Exception\ApiException;

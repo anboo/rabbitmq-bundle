@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\Command;
+namespace Anboo\RabbitmqBundle\Command;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use Ramsey\Uuid\Uuid;
@@ -8,8 +8,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Anboo\ApiBundle\AMQP\AMQPConnection;
-use Anboo\ApiBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\AMQPConnection;
+use Anboo\RabbitmqBundle\AMQP\Packet;
 
 /**
  * Class SendPacketCommand

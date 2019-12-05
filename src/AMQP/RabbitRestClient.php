@@ -1,9 +1,9 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP;
+namespace Anboo\RabbitmqBundle\AMQP;
 
 use GuzzleHttp\Client;
-use Anboo\ApiBundle\AMQP\Model\Bind;
+use Anboo\RabbitmqBundle\AMQP\Model\Bind;
 
 /**
  * Class RabbitRestClient

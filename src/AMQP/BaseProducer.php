@@ -1,11 +1,11 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP;
+namespace Anboo\RabbitmqBundle\AMQP;
 
 use Ramsey\Uuid\Uuid;
-use Anboo\ApiBundle\AMQP\Router\Route;
-use Anboo\ApiBundle\AMQP\Router\RouterCollection;
-use Anboo\ApiBundle\AMQP\RPC\ResponseStorageInterface;
+use Anboo\RabbitmqBundle\AMQP\Router\Route;
+use Anboo\RabbitmqBundle\AMQP\Router\RouterCollection;
+use Anboo\RabbitmqBundle\AMQP\RPC\ResponseStorageInterface;
 
 /**
  * Class BaseClient

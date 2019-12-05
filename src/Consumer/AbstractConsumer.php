@@ -1,9 +1,9 @@
 <?php
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use PhpAmqpLib\Message\AMQPMessage;
-use Anboo\ApiBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Packet;
 
 /**
  * Class AbstractProducer

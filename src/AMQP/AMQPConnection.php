@@ -1,6 +1,6 @@
 <?php
 
-namespace Anboo\ApiBundle\AMQP;
+namespace Anboo\RabbitmqBundle\AMQP;
 
 use PhpAmqpLib\Connection\AMQPLazyConnection;
 

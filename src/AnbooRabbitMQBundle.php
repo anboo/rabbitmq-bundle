@@ -6,14 +6,15 @@
  * Time: 7:49
  */
 
-namespace Anboo\ApiBundle;
+namespace Anboo\RabbitmqBundle;
 
-use Anboo\ApiBundle\DependencyInjection\AnbooApiExtension;
-use Anboo\ApiBundle\DependencyInjection\CompilerPass\FixSerializerCompilerPass;
+use Anboo\RabbitmqBundle\DependencyInjection\AnbooApiExtension;
+use Anboo\RabbitmqBundle\DependencyInjection\Compiler\AmqpConsumerPass;
+use Anboo\RabbitmqBundle\DependencyInjection\CompilerPass\FixSerializerCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AnbooApiBundle extends Bundle
+class AnbooRabbitMQBundle extends Bundle
 {
     /**
      * @return mixed
@@ -27,6 +28,6 @@ class AnbooApiBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new FixSerializerCompilerPass());
+        $container->addCompilerPass(new AmqpConsumerPass());
     }
 }

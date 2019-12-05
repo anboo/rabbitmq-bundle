@@ -1,12 +1,12 @@
 <?php
 
-namespace Anboo\ApiBundle\DependencyInjection\Compiler;
+namespace Anboo\RabbitmqBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Anboo\ApiBundle\AMQP\Router\Route;
-use Anboo\ApiBundle\Annotation\Enqueue\Consume;
-use Anboo\ApiBundle\AMQP\Router\RouterCollection;
+use Anboo\RabbitmqBundle\AMQP\Router\Route;
+use Anboo\RabbitmqBundle\Annotation\Enqueue\Consume;
+use Anboo\RabbitmqBundle\AMQP\Router\RouterCollection;
 
 /**
  * Class AmqpConsumerPass

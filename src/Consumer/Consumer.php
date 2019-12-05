@@ -1,13 +1,13 @@
 <?php
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
-use Anboo\ApiBundle\AMQP\Packet;
-use Anboo\ApiBundle\AMQP\Producer;
-use Anboo\ApiBundle\AMQP\RPC\Exchange;
-use Anboo\ApiBundle\AMQP\RPC\ReplyContextTrait;
+use Anboo\RabbitmqBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Producer;
+use Anboo\RabbitmqBundle\AMQP\RPC\Exchange;
+use Anboo\RabbitmqBundle\AMQP\RPC\ReplyContextTrait;
 
 /**
  * Class Consumer

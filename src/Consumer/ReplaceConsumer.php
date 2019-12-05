@@ -1,18 +1,18 @@
 <?php
 
-namespace Anboo\ApiBundle\Consumer;
+namespace Anboo\RabbitmqBundle\Consumer;
 
 use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Anboo\ApiBundle\AMQP\Exception\AmqpFatalException;
-use Anboo\ApiBundle\AMQP\Exception\AmqpNotFoundEntityException;
-use Anboo\ApiBundle\AMQP\Packet;
-use Anboo\ApiBundle\AMQP\Router\Route;
-use Anboo\ApiBundle\EventDispatcher\AMQP\AmqpBeforeProcess;
-use Anboo\ApiBundle\Service\CRUD\ReplaceItemService;
-use Anboo\ApiBundle\Service\DTO\DTOFactory;
+use Anboo\RabbitmqBundle\AMQP\Exception\AmqpFatalException;
+use Anboo\RabbitmqBundle\AMQP\Exception\AmqpNotFoundEntityException;
+use Anboo\RabbitmqBundle\AMQP\Packet;
+use Anboo\RabbitmqBundle\AMQP\Router\Route;
+use Anboo\RabbitmqBundle\EventDispatcher\AMQP\AmqpBeforeProcess;
+use Anboo\RabbitmqBundle\Service\CRUD\ReplaceItemService;
+use Anboo\RabbitmqBundle\Service\DTO\DTOFactory;
 use Webslon\Library\Api\Exception\ApiException;
 
 class ReplaceConsumer extends AbstractCrudConsumer
