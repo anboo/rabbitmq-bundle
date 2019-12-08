@@ -312,6 +312,7 @@ class ConsumerCommand extends Command
             }
             call_user_func([$processor, $method], $packet);
         } catch (\Exception $exception) {
+            $msgChannel->basic_reject($msg->delivery_info['delivery_tag'], false);
             $this->logger->error(sprintf('AMQP rejected, error: %s', $exception->getMessage()), RabbitMqContext::getLoggingContext($packet, $exception));
             return;
         }
