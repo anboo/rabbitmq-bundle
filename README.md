@@ -85,3 +85,4 @@ class DemoConsumer extends Consumer
      */
 ```
 
+`bin/console anboo:api:consumer --setup-broker --max-messages=5000`
