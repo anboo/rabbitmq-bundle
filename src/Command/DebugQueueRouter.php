@@ -10,7 +10,7 @@ use Anboo\RabbitmqBundle\AMQP\Router\RouterCollection;
 
 class DebugQueueRouter extends Command
 {
-    protected static $defaultName = 'webslon:debug:queue:router';
+    protected static $defaultName = 'anboo:debug:queue:router';
 
     /**
      * @var RouterCollection

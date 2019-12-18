@@ -41,7 +41,7 @@ class ConsumerCommand extends Command
 {
     const BEFORE_REJECT = 'amqp.onBeforeReject';
 
-    protected static $defaultName = 'webslon:api:consumer';
+    protected static $defaultName = 'anboo:api:consumer';
 
     /**
      * @var AMQPConnection

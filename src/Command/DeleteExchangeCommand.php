@@ -15,7 +15,7 @@ use Anboo\RabbitmqBundle\AMQP\AMQPConnection;
  */
 class DeleteExchangeCommand extends Command
 {
-    protected static $defaultName = 'webslon:exchange:delete';
+    protected static $defaultName = 'anboo:exchange:delete';
 
     private $AMQPConnection;
 

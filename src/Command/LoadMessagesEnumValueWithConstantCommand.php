@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class LoadMessagesEnumValueWithConstantCommand extends Command
 {
-    protected static $defaultName = 'webslon:load:messages:enum:constant';
+    protected static $defaultName = 'anboo:load:messages:enum:constant';
 
     /**
      * @var Finder

@@ -20,7 +20,7 @@ use Anboo\RabbitmqBundle\DBAL\Types\EnumInterface;
  */
 class LoadMessagesWithSwgPropertyCommand extends Command
 {
-    protected static $defaultName = 'webslon:load:messages:swg:props';
+    protected static $defaultName = 'anboo:load:messages:swg:props';
 
     /**
      * @var AnnotationReader

@@ -16,7 +16,7 @@ use Anboo\RabbitmqBundle\AMQP\Packet;
  */
 class SendPacketCommand extends Command
 {
-    protected static $defaultName = 'webslon:debug:queue:send';
+    protected static $defaultName = 'anboo:debug:queue:send';
 
     /** @var AMQPConnection */
     private $amqpConnection;

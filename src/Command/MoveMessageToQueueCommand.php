@@ -18,7 +18,7 @@ use Anboo\RabbitmqBundle\AMQP\Producer;
  */
 class MoveMessageToQueueCommand extends Command
 {
-    protected static $defaultName = 'webslon:amqp-msg:move-to-queue';
+    protected static $defaultName = 'anboo:amqp-msg:move-to-queue';
     /**
      * @var AMQPConnection
      */
