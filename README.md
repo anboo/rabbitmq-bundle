@@ -10,7 +10,7 @@ anboo_rabbitmq:
 ```yaml
 # config/services.yaml
 services:
-    App\AMQP\Consumer\:
+    App\Consumer\:
         resource: '../src/Consumer/*'
         public: true
         tags: ['anboo.queue_consumer']
@@ -85,3 +85,4 @@ class DemoConsumer extends Consumer
      */
 ```
 
+`bin/console anboo:api:consumer --setup-broker --max-messages=5000`
