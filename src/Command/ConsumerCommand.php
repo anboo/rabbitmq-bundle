@@ -341,6 +341,18 @@ class ConsumerCommand extends Command
      */
     private function isQueueSupport(string $queue) : bool
     {
-        return empty($this->supportedQueues) || in_array($queue, $this->supportedQueues);
+        foreach ($this->supportedQueues as $supportedQueue) {
+            if (preg_match('/'.str_replace('*', '(.*)', $supportedQueue).'/', $queue) === 1) {
+                $this->logger->debug('Listen '.$queue.' queue');
+                return true;
+            }
+        }
+
+        $res = empty($this->supportedQueues) || in_array($queue, $this->supportedQueues);
+        if ($res) {
+            $this->logger->debug('Listen '.$queue.' queue');
+        }
+
+        return $res;
     }
 }
