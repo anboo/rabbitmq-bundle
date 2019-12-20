@@ -2,6 +2,7 @@
 
 namespace Anboo\RabbitmqBundle\Command;
 
+use Anboo\RabbitmqBundle\Event\PreLoadRoutingConsumerEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 use ParagonIE\Paseto\Exception\PasetoException;
@@ -108,6 +109,7 @@ class ConsumerCommand extends Command
      * @param ContainerInterface $container
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $entityManager
+     * @param EventDispatcher        $eventDispatcher
      */
     public function __construct (
         AMQPConnection $connection,
@@ -147,6 +149,8 @@ class ConsumerCommand extends Command
 
     protected function execute (InputInterface $input, OutputInterface $output)
     {
+        $this->eventDispatcher->dispatch(new PreLoadRoutingConsumerEvent($this->routeCollection), PreLoadRoutingConsumerEvent::NAME);
+
         $io = new SymfonyStyle($input, $output);
 
         gc_enable();

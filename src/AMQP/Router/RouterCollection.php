@@ -45,6 +45,14 @@ class RouterCollection
     }
 
     /**
+     * @param Route $route
+     */
+    public function add(Route $route)
+    {
+        $this->routes[] = $route;
+    }
+
+    /**
      * @return Route[]
      */
     public function all()
