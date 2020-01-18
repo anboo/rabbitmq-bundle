@@ -2,6 +2,7 @@
 
 namespace Anboo\RabbitmqBundle\Command;
 
+use Anboo\RabbitmqBundle\Event\PostProcessMessageEvent;
 use Anboo\RabbitmqBundle\Event\PreLoadRoutingConsumerEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
@@ -322,6 +323,8 @@ class ConsumerCommand extends Command
         }
 
         $this->processedMessages += 1;
+
+        $this->eventDispatcher->dispatch(new PostProcessMessageEvent($packet), PostProcessMessageEvent::NAME);
 
         $this->entityManager->clear();
         $this->entityManager->getConnection()->close();
