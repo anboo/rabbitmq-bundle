@@ -4,6 +4,7 @@ namespace Anboo\RabbitmqBundle\Command;
 
 use Anboo\RabbitmqBundle\Event\PostProcessMessageEvent;
 use Anboo\RabbitmqBundle\Event\PreLoadRoutingConsumerEvent;
+use Anboo\RabbitmqBundle\Event\PreProcessMessageEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 use ParagonIE\Paseto\Exception\PasetoException;
@@ -304,6 +305,8 @@ class ConsumerCommand extends Command
         if (isset($dataMsg['rpcCallStack'])) {
             $packet->setRpcCallStack($dataMsg['rpcCallStack'] ?? []);
         }
+
+        $this->eventDispatcher->dispatch(new PreProcessMessageEvent($packet), PreProcessMessageEvent::NAME);
 
         $router = $this->routeCollection->getRouteByQueueName($queueName);
         $processorId = $router->getConsumer();
