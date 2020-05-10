@@ -193,7 +193,7 @@ class ConsumerCommand extends Command
                 $queueParameters['exclusive'],
                 $queueParameters['autoDelete'],
                 false,
-                !empty($exchangeParameters['arguments']) ? new AMQPTable($exchangeParameters['arguments']) : []
+                !empty($queueParameters['arguments']) ? new AMQPTable($queueParameters['arguments']) : []
             );
 
             if ($this->isQueueSupport($queueDeclare)) {
