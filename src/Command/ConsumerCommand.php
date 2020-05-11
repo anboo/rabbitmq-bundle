@@ -196,7 +196,7 @@ class ConsumerCommand extends Command
                 !empty($queueParameters['arguments']) ? new AMQPTable($queueParameters['arguments']) : []
             );
 
-            if ($this->isQueueSupport($queueDeclare)) {
+            if ($this->isQueueSupport($queueDeclare) && $queueParameters['consume']) {
                 $io->comment(sprintf('Start queue %s', $queueDeclare));
 
                 $consumerParameters = $route->getConsumerParameters();

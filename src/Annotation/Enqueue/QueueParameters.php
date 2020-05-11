@@ -10,4 +10,7 @@ class QueueParameters extends Parameters
 {
     /** @var bool */
     public $exclusive = false;
+    
+    /** @var bool */
+    public $consume = true;
 }

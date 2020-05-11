@@ -222,6 +222,7 @@ class Route
                 'passive' => $consume->queueParameters->passive,
                 'durable' => $consume->queueParameters->durable,
                 'arguments' => $consume->queueParameters->arguments,
+                'consume' => $consume->queueParameters->consume,
             ],
             'consumer_parameters' => [
                 'noLocal' => $consume->consumerParameters->noLocal,
