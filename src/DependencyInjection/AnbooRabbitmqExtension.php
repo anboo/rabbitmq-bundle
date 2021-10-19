@@ -27,7 +27,17 @@ class AnbooRabbitmqExtension extends Extension
         );
 
         $loader->load('services.yml');
-        $container->setParameter('anboo_rabbitmq.rabbitmq.host', $config['rabbitmq']['host'] ?? '127.0.0.1');
+
+        $dsn = $config['rabbitmq']['dsn'] ?? null;
+        if ($dsn) {
+            $parsedDsn = parse_url($_ENV['MESSENGER_TRANSPORT_DSN']);
+            $config['rabbitmq']['host'] = $parsedDsn['host'];
+            $config['rabbitmq']['port'] = $parsedDsn['port'];
+            $config['rabbitmq']['username'] = $parsedDsn['user'];
+            $config['rabbitmq']['password'] = $parsedDsn['pass'];
+        }
+
+        $container->setParameter('anboo_rabbitmq.rabbitmq.host', $config['rabbitmq']['host'] ?? '');
         $container->setParameter('anboo_rabbitmq.rabbitmq.port', $config['rabbitmq']['port'] ?? 5672);
         $container->setParameter('anboo_rabbitmq.rabbitmq.username', $config['rabbitmq']['username'] ?? 'guest');
         $container->setParameter('anboo_rabbitmq.rabbitmq.password', $config['rabbitmq']['password'] ?? 'guest');

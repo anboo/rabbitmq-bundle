@@ -149,7 +149,7 @@ class ConsumerCommand extends Command
         ;
     }
 
-    protected function execute (InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->eventDispatcher->dispatch(new PreLoadRoutingConsumerEvent($this->routeCollection), PreLoadRoutingConsumerEvent::NAME);
 
@@ -256,6 +256,8 @@ class ConsumerCommand extends Command
 
         $ch->close();
         $this->connection->close();
+
+        return Command::SUCCESS;
     }
 
     /**
