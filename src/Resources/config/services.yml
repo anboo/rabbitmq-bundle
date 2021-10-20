@@ -28,14 +28,6 @@ services:
       - ['setResponseQueueCallback', ['%anboo_rabbitmq.rabbitmq.rpc_response_queue%']]
       - ['setLifetimeCallbackRpcQueue', ['%anboo_rabbitmq.rabbitmq.lifetime_callback_rpc_queue%']]
 
-  Anboo\RabbitmqBundle\Response\Async\AsyncResponseSender:
-    public: true
-    autowire: true
-    autoconfigure: true
-    calls:
-      - ['setResponseQueueCallback', ['%anboo_rabbitmq.rabbitmq.rpc_response_queue%']]
-      - ['setLifetimeCallbackRpcQueue', ['%anboo_rabbitmq.rabbitmq.lifetime_callback_rpc_queue%']]
-
   Anboo\RabbitmqBundle\Command\ConsumerCommand:
     public: true
     autowire: true
