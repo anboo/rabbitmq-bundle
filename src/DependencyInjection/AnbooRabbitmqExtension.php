@@ -31,10 +31,12 @@ class AnbooRabbitmqExtension extends Extension
         $dsn = $config['rabbitmq']['dsn'] ?? null;
         if ($dsn) {
             $parsedDsn = parse_url($_ENV['MESSENGER_TRANSPORT_DSN']);
-            $config['rabbitmq']['host'] = $parsedDsn['host'];
-            $config['rabbitmq']['port'] = $parsedDsn['port'];
-            $config['rabbitmq']['username'] = $parsedDsn['user'];
-            $config['rabbitmq']['password'] = $parsedDsn['pass'];
+            if ($parsedDsn) {
+                $config['rabbitmq']['host'] = $parsedDsn['host'];
+                $config['rabbitmq']['port'] = $parsedDsn['port'];
+                $config['rabbitmq']['username'] = $parsedDsn['user'];
+                $config['rabbitmq']['password'] = $parsedDsn['pass'];
+            }
         }
 
         $container->setParameter('anboo_rabbitmq.rabbitmq.host', $config['rabbitmq']['host'] ?? '');
